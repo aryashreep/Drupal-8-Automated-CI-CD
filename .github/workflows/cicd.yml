@@ -42,6 +42,9 @@ jobs:
         with:
           php-version: ${{ matrix.php_version }}
 
+      - name: Install Composer dependencies
+        run: composer install --dev
+
   initiate-services:
     runs-on: ubuntu-latest
     strategy:
@@ -74,6 +77,9 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
+
+    - name: Install Composer dependencies
+      run: composer install --dev
 
   phpunit:
     runs-on: ubuntu-latest
