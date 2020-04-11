@@ -36,7 +36,7 @@ jobs:
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
-          mysql --host -uroot -ppassword -e "SHOW DATABASES"
+          mysql -h 127.0.0.1 --port 3306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS d8_music;'
 
   test-services:
     runs-on: ubuntu-latest
