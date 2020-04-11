@@ -98,6 +98,9 @@ jobs:
         mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
 
+    - name: Install composer
+      run: apk add wget && wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer;
+
     - name: Install Composer dependencies
       run: |
         composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
