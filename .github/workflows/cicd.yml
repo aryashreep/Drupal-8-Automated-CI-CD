@@ -37,7 +37,7 @@ jobs:
         run: |
           sudo apt-get install -y mysql-client
 
-  test-services:
+  initiate-services:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -55,7 +55,9 @@ jobs:
         apt-get update
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
-        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
+        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES;"
+        USE d8_music;
+        SHOW TABLES;
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     #steps:
