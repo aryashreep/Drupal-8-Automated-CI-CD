@@ -31,13 +31,13 @@ jobs:
           MYSQL_DATABASE: d8_music
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
-		
+
     steps:
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
           mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-		
+
   test-services:
     runs-on: ubuntu-latest
     strategy:
