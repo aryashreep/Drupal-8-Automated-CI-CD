@@ -56,7 +56,7 @@ jobs:
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        echo pwd
+        echo $(pwd)
         #mysql --host mysql -uroot -ppassword d8_music < $GITHUB_WORKSPACE/scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
     
