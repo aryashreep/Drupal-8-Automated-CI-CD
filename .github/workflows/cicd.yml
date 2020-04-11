@@ -56,8 +56,8 @@ jobs:
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        echo GITHUB_WORKSPACE
-        mysql --host mysql -uroot -ppassword d8_music < {GITHUB_WORKSPACE}/scripts/database/dumps/d8_music.sql
+        echo $GITHUB_WORKSPACE
+        mysql --host mysql -uroot -ppassword d8_music < $GITHUB_WORKSPACE/scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
     
     # Steps represent a sequence of tasks that will be executed as part of the job
