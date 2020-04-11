@@ -33,6 +33,11 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
     steps:
+      - name: Check out the code 
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
