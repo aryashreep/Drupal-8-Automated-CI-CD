@@ -95,7 +95,6 @@ jobs:
 
     - name: Install Composer dependencies
       run: |
-        php -v
         composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
         drush st
         drush cim sync
