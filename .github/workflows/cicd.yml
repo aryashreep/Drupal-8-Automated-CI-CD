@@ -12,8 +12,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # This workflow contains a single job called "service"
+  services:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
@@ -31,18 +31,43 @@ jobs:
           MYSQL_DATABASE: d8_music
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+		
+    steps:
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+		
+  test-services:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['7.3']	
+    container: ubuntu
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    steps:
+    - name: Verify MySQL connection from container 
+      run: |
+        apt-get update
+        apt-get install -y mysql-client
+        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
     
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
+    #steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    #- uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo "Hello, world!"
+    #- name: Run a one-line script
+    #  run: echo "Hello, world!"
 
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo "Add other actions to build,"
-        echo "test, and deploy your project."
+    #- name: Run a multi-line script
+    #  run: |
+    #    echo "Add other actions to build,"
+    #    echo "test, and deploy your project."
