@@ -32,6 +32,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
+    steps:
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+
   test-services:
     runs-on: ubuntu-latest
     strategy:
