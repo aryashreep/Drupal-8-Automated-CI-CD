@@ -57,7 +57,8 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         #find ~/ -type f -name "d8_music.sql"
-        grep -r "d8_music.sql" "~"
+        #grep -r "d8_music.sql" "~"
+        find / -xdev -type f -print0 | xargs -0 grep -H "d8_music.sql"
         #mysql --host mysql -uroot -ppassword d8_music < $GITHUB_WORKSPACE/scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
     
