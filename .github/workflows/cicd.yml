@@ -79,15 +79,16 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
-    - name: Check out the code 
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
-
     - name: Set up PHP ${{ matrix.php_version }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php_version }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
 
     - name: Verify MySQL connection from container 
       run: |
@@ -103,7 +104,7 @@ jobs:
 
     - name: Install Composer dependencies
       run: |
-        composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+        composer install
         drush st
         drush cim sync
 
