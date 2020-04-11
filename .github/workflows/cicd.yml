@@ -49,15 +49,21 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
     steps:
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+  
     - name: Verify MySQL connection from container 
       run: |
         apt-get update
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        ls -l /github/workspace
-        #mysql --host mysql -uroot -ppassword d8_music < $GITHUB_WORKSPACE/scripts/database/dumps/d8_music.sql
+        ls -l .
+        #mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
     
     # Steps represent a sequence of tasks that will be executed as part of the job
