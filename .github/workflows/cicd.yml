@@ -99,7 +99,7 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
 
     - name: Install composer
-      run: apk add wget && wget -qO- https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer;
+      run: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
     - name: Install Composer dependencies
       run: |
