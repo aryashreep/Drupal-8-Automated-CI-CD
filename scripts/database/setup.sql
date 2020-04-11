@@ -1,0 +1,7 @@
+CREATE DATABASE d8_music;
+
+USE d8_music;
+SOURCE /tmp/dumps/d8_music.sql;
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

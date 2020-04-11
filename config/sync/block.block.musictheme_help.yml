@@ -1,0 +1,22 @@
+uuid: aa958019-3c91-40a9-96fe-4ca2d60fc936
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - musictheme
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: musictheme_help
+theme: musictheme
+region: content
+weight: -3
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

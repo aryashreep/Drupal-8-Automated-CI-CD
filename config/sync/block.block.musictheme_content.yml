@@ -1,0 +1,22 @@
+uuid: f751d0c7-088c-4749-aa03-0423da05b0e4
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - musictheme
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: musictheme_content
+theme: musictheme
+region: content
+weight: -5
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,23 @@
+uuid: e19d35c3-eb06-4703-9ff7-10cad188abae
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - integrity
+_core:
+  default_config_hash: Q-4EcGAsu26ICu4ejEz0uE1zv4akpiaOsizxgZfAmEw
+id: integrity_search
+theme: integrity
+region: main_menu
+weight: -1
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: visible
+  page_id: node_search
+visibility: {  }

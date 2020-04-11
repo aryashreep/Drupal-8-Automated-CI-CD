@@ -1,0 +1,26 @@
+uuid: 7e486794-643b-47e9-9dd0-fb878370871f
+langcode: en
+status: true
+dependencies:
+  module:
+    - latest_artist
+    - system
+  theme:
+    - integrity
+id: artistblock
+theme: integrity
+region: sidebar_first
+weight: -9
+provider: null
+plugin: artist_custom_block
+settings:
+  id: artist_custom_block
+  label: 'Popular Artist'
+  provider: latest_artist
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

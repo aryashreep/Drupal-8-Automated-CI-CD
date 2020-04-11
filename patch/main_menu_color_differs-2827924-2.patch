@@ -1,0 +1,168 @@
+diff --git a/css/custom.css b/css/custom.css
+index 23492ba..41af798 100644
+--- a/css/custom.css
++++ b/css/custom.css
+@@ -105,13 +105,16 @@ header#header {
+ color:#4badef;
+ }
+ .nav>li>a:hover, .nav>li>a:focus {
+-  background-color:white;
++  background-color:#3b3b3b;
+   color: #4badef;
+   cursor:pointer;
+ }
++.dropdown-menu>li {
++  background-color:#3b3b3b;
++}
+ .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+-  background-color: #4badef;
+-  color: #fff;
++  background-color: #3b3b3b;
++  color: #4badef;
+ }
+ .dropdown-menu>li>a{
+ padding: 5px 20px !important;
+@@ -303,6 +306,23 @@ strong {
+   margin-bottom: 4em;
+ }
+ 
++.menu-dark nav {
++  background-color: #1B2738;
++  margin-top: 1px;
++}
++.menu-dark nav a{
++  color: #ffffff;
++}
++.menu-dark nav .navbar {
++  margin-bottom: 0px;
++}
++.menu-dark nav ul {
++  padding : 0px;
++}
++.menu-dark nav .nav > li > a:hover, .menu-dark nav .nav > li > a:focus {
++  background-color: unset;
++}
++
+ .menu--main,
+ .block-menu .navigation {
+   display: inline-block;
+@@ -419,3 +439,7 @@ strong {
+     left: 0;
+   }
+ }
++
++.jcarousel-wrapper.jcarousel-skin-default{
++  height: 160px;
++}
+\ No newline at end of file
+diff --git a/integrity.theme b/integrity.theme
+index 7bc0508..e04d3bb 100644
+--- a/integrity.theme
++++ b/integrity.theme
+@@ -75,6 +75,16 @@ function integrity_preprocess_page(&$variables) {
+   if (theme_get_setting('slideshow_display')) {
+     $variables['slider_contents'] = $slider_contents;
+   }
++  $menu =\Drupal::config('node.settings')->get('menu_type');
++  if(empty($menu)) {
++    $menu == '0';
++  }
++  if($menu == '0') {
++    $menu_type = 'light';
++  } elseif ($menu == '1') {
++    $menu_type = 'dark';
++  }
++  $variables['menu_type'] = $menu_type;
+ }
+ 
+ /**
+@@ -188,6 +198,23 @@ function integrity_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Fo
+     '#collapsible' => FALSE,
+     '#collapsed' => FALSE,
+   );
++  $form['integrity_settings']['menu_type'] = array(
++    '#type' => 'details',
++    '#title' => t('Menu Type'),
++    '#collapsible' => TRUE,
++    '#collapsed' => FALSE,
++  );
++  $menu =\Drupal::config('node.settings')->get('menu_type');
++  if (empty($menu)) {
++    $defalt_value = '0';
++  } else {
++    $defalt_value = $menu;
++  }
++  $form['integrity_settings']['menu_type']['type'] = array(
++    '#type' => 'radios',
++    '#default_value' => $defalt_value,
++    '#options' => array(t('Light'), t('Dark')),
++  );
+   $form['integrity_settings']['slideshow'] = array(
+     '#type' => 'details',
+     '#title' => t('Front Page Slideshow'),
+@@ -244,6 +271,9 @@ function integrity_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\Fo
+ function integrity_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+   $account = \Drupal::currentUser();
+   $values = $form_state->getValues();
++  \Drupal::configFactory()->getEditable('node.settings')
++      ->set('menu_type', $values['type'])
++      ->save();
+   for ($i = 0; $i <= SLIDESHOW_COUNT; $i++) {
+     if (isset($values['slide_image_path' . $i]) && !empty($values['slide_image_path' . $i])) {
+       // Load the file via file.fid.
+@@ -256,3 +286,27 @@ function integrity_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInter
+     }
+   }
+ }
++
++/**
++ * Implements hook_preprocess_breadcrumb().
++ */
++function integrity_preprocess_breadcrumb(&$variables) {
++  if ($variables['breadcrumb']) {
++    $request = \Drupal::request();
++    $route_match = \Drupal::routeMatch();
++    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
++
++    $node = $request->attributes->get('node');
++    $typeName = ucfirst($node->bundle());
++    if (!empty($page_title)) {
++      $variables['breadcrumb'][] = [
++        'text' => $typeName,
++        'attributes' => new Attribute(['class' => ['active']])
++      ];      
++      $variables['breadcrumb'][] = [
++        'text' => $page_title,
++        'attributes' => new Attribute(['class' => ['active']])
++      ];  
++    }
++  }
++}
+\ No newline at end of file
+diff --git a/templates/page.html.twig b/templates/page.html.twig
+index 6625ece..ffc0ae0 100644
+--- a/templates/page.html.twig
++++ b/templates/page.html.twig
+@@ -72,6 +72,11 @@
+  * @see html.html.twig
+  */
+ #}
++{%
++  set menu_classes = [
++    menu_type ?'menu-'~menu_type,
++  ]
++%}
+ <div id="page-wrapper">
+   <div id="page">
+     <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t}}">
+@@ -82,7 +87,9 @@
+       </div>
+       <div class="section layout-container clearfix">
+         <div class="col-md-12 col-sm-12">
+-        {{ page.main_menu }}
++          <div {{ attributes.addClass(menu_classes) }}>
++            {{ page.main_menu }}
++          </div>
+         </div>
+       </div>
+     </header>

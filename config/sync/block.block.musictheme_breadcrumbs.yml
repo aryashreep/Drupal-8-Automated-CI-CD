@@ -1,0 +1,22 @@
+uuid: 3457229b-b332-4549-b7d7-3048a3114863
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - musictheme
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: musictheme_breadcrumbs
+theme: musictheme
+region: header
+weight: -6
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

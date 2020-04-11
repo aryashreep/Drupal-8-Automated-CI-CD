@@ -1,0 +1,30 @@
+uuid: e345f2e6-73c8-45a0-879a-03e37248949e
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.latest_block
+  module:
+    - system
+    - views
+  theme:
+    - integrity
+id: views_block__latest_block_block_2
+theme: integrity
+region: sidebar_first
+weight: -7
+provider: null
+plugin: 'views_block:latest_block-block_2'
+settings:
+  id: 'views_block:latest_block-block_2'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

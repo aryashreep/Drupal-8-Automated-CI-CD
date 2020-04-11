@@ -1,0 +1,20 @@
+uuid: fa853638-2a0c-43e7-a1e4-ffe5d61ea63a
+langcode: en
+status: true
+dependencies:
+  theme:
+    - musictheme
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: musictheme_local_actions
+theme: musictheme
+region: content
+weight: -2
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: f59f07b9-6056-4f30-8380-f666f71a525f
+langcode: en
+status: true
+dependencies:
+  theme:
+    - integrity
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: integrity_local_tasks
+theme: integrity
+region: content
+weight: -12
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

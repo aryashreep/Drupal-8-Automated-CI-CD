@@ -1,0 +1,22 @@
+uuid: d916eb5f-d947-4c1e-baa0-8fb5e4973a0f
+langcode: en
+status: true
+dependencies:
+  theme:
+    - musictheme
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: musictheme_local_tasks
+theme: musictheme
+region: content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

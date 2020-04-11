@@ -1,0 +1,23 @@
+uuid: ea47f978-d5f3-481e-8be6-b8f811245861
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_album_rating
+    - node.type.album
+id: node.album.field_album_rating
+field_name: field_album_rating
+entity_type: node
+bundle: album
+label: 'Album rating'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 1
+  max: !!float 5
+  prefix: ''
+  suffix: ''
+field_type: decimal

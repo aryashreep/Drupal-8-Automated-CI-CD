@@ -1,0 +1,14 @@
+uuid: 7ee832c8-0ebc-4ea9-8751-11b4f619b278
+name: 'Music World'
+mail: admin@admin.com
+slogan: 'Hare Krishna'
+page:
+  403: ''
+  404: ''
+  front: /node/217
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE

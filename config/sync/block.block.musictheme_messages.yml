@@ -1,0 +1,22 @@
+uuid: 014289df-6f06-4f4d-a6cd-1e81476fd147
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - musictheme
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: musictheme_messages
+theme: musictheme
+region: header
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

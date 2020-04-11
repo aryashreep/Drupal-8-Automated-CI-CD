@@ -1,0 +1,30 @@
+uuid: 9b8da2a8-f6ab-4772-8961-3f80b4161a86
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.slider
+  module:
+    - system
+    - views
+  theme:
+    - integrity
+id: views_block__slider_block_3
+theme: integrity
+region: content
+weight: -7
+provider: null
+plugin: 'views_block:slider-block_3'
+settings:
+  id: 'views_block:slider-block_3'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

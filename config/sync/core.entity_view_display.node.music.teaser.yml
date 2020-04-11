@@ -1,0 +1,64 @@
+uuid: 2dd6e741-266a-412f-a918-6e360a952a76
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.music.field_music_comments
+    - field.field.node.music.field_music_description
+    - field.field.node.music.field_music_genre
+    - field.field.node.music.field_music_image
+    - field.field.node.music.field_music_video
+    - field.field.node.music.field_related_artist
+    - image.style.medium
+    - node.type.music
+  module:
+    - image
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.music.teaser
+targetEntityType: node
+bundle: music
+mode: teaser
+content:
+  field_music_description:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 400
+    third_party_settings: {  }
+    type: text_trimmed
+    region: content
+  field_music_genre:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_music_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_music_comments: true
+  field_music_video: true
+  field_related_artist: true
+  langcode: true
+  search_api_excerpt: true

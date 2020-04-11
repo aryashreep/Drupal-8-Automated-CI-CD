@@ -1,0 +1,22 @@
+uuid: c6227076-3567-4325-8182-8d954605fd7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: basic_page_url_alias
+label: 'Basic page URL alias'
+type: 'canonical_entities:node'
+pattern: 'page/[node:title]'
+selection_criteria:
+  fbc9598c-f5d9-4334-83cc-9c29422611fb:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: fbc9598c-f5d9-4334-83cc-9c29422611fb
+selection_logic: and
+weight: -5
+relationships: {  }

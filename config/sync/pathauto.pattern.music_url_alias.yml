@@ -1,0 +1,22 @@
+uuid: 9d0f8c27-0988-4663-a8a6-c25bec4c451b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: music_url_alias
+label: 'Music URL alias'
+type: 'canonical_entities:node'
+pattern: 'track/[node:title]'
+selection_criteria:
+  4e0eb541-5fca-4308-96ef-fb02072329d8:
+    id: node_type
+    bundles:
+      music: music
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 4e0eb541-5fca-4308-96ef-fb02072329d8
+selection_logic: and
+weight: -5
+relationships: {  }

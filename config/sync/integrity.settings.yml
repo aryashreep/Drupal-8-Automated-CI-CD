@@ -1,0 +1,42 @@
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  logo: true
+  name: true
+  node_user_picture: true
+  slogan: true
+slideshow_display: 1
+slide_title_1: 'Hare Krishna'
+slide_description_1: 'The Hare Krishna mantra, also referred to reverentially as the Maha Mantra, is a 16-word Vaishnava mantra which is mentioned in the Kali-Santarana Upanishad, and which from the 15th century rose to importance in the Bhakti movement following the teachings of Chaitanya Mahaprabhu.'
+slide_image_path_1: /placeholders/screenshots/ss_1.png
+slide_title_2: Krishna
+slide_description_2: 'Krishna is a major deity in Hinduism. He is worshipped as the eighth avatar of the god Vishnu and also as the supreme God in his own right.'
+slide_image_path_2: /placeholders/screenshots/ss_1.png
+slide_title_3: Kirtan
+slide_description_3: 'Kirtan (Sanskrit: कीर्तन; IAST: Kīrtana) is a Sanskrit word that means "narrating, reciting, telling, describing" of an idea or story, specifically in Indian religions.'
+slide_image_path_3: /placeholders/screenshots/ss_1.png
+slide_title_4: 'The music of yoga'
+slide_description_4: '"I was dropped right into this whole ashram world without any knowledge about it at all," recalls the Grammy-nominated producer, a leading figure in introducing "new kirtan" to mainstream music audiences.'
+slide_image_path_4: /placeholders/screenshots/ss_1.png
+slide_title_5: 'Bhakti yoga'
+slide_description_5: 'Bhakti yoga, also called Bhakti marga, is a spiritual path or spiritual practice within Hinduism focused on loving devotion towards a personal god. It is one of the paths in the spiritual practices of Hindus, others being Jnana yoga and Karma yoga. The tradition has ancient roots.'
+slide_image_path_5: /placeholders/screenshots/ss_1.png
+_core:
+  default_config_hash: iXIUw_9NZN3krjMZCCoIENM6sIMQKxz6AtKs4zcMhMg
+logo:
+  use_default: true
+favicon:
+  use_default: true
+slideshow_fullwidth: 0
+slide_image_path1:
+  - '2'
+slide_image_path2:
+  - '3'
+slide_image_path3:
+  - '4'
+slide_image_path4:
+  - '5'
+slide_image_path5:
+  - '6'
+type: '1'

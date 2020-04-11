@@ -1,0 +1,17 @@
+uuid: cfbcf7eb-4dc1-48ee-9f9e-9f35eb1b53da
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Album
+type: album
+description: 'It contains album content'
+help: ''
+new_revision: true
+preview_mode: 2
+display_submitted: false

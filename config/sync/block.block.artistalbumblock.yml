@@ -1,0 +1,26 @@
+uuid: 37f7ccd1-e739-49d7-a4fc-7af5d13b21f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - latest_artist
+    - system
+  theme:
+    - integrity
+id: artistalbumblock
+theme: integrity
+region: content
+weight: -4
+provider: null
+plugin: artist_album_block
+settings:
+  id: artist_album_block
+  label: Albums
+  provider: latest_artist
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '/artist/*'
+    negate: false
+    context_mapping: {  }

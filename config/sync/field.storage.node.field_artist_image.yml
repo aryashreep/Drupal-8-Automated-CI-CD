@@ -1,0 +1,30 @@
+uuid: 57399a66-230e-4324-8212-d0121099ca14
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - node
+id: node.field_artist_image
+field_name: field_artist_image
+entity_type: node
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: 3e18f2c0-d113-402b-a460-a4f2f792b038
+    alt: 'No image available'
+    title: 'No image available'
+    width: 170
+    height: 170
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

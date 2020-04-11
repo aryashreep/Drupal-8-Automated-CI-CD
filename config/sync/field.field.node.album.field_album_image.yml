@@ -1,0 +1,38 @@
+uuid: 853a1a4e-3bbe-4581-af11-de0c1091a482
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_album_image
+    - node.type.album
+  module:
+    - image
+id: node.album.field_album_image
+field_name: field_album_image
+entity_type: node
+bundle: album
+label: 'Album image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: album
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: '1 MB'
+  max_resolution: 500x500
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

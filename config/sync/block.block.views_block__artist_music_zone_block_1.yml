@@ -1,0 +1,31 @@
+uuid: 915a2ed3-7f00-48e9-918b-a2514846737d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.artist_music_zone
+  module:
+    - system
+    - views
+  theme:
+    - integrity
+id: views_block__artist_music_zone_block_1
+theme: integrity
+region: content
+weight: -5
+provider: null
+plugin: 'views_block:artist_music_zone-block_1'
+settings:
+  id: 'views_block:artist_music_zone-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/artist/*'
+    negate: false
+    context_mapping: {  }

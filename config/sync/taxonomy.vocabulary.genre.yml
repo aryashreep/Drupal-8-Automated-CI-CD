@@ -1,0 +1,8 @@
+uuid: c52d7637-379b-4bed-a40a-7f42d54ad06c
+langcode: en
+status: true
+dependencies: {  }
+name: Genre
+vid: genre
+description: 'A music genre is a conventional category that identifies some pieces of music.'
+weight: 0

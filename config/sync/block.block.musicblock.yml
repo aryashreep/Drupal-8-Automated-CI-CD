@@ -1,0 +1,26 @@
+uuid: 5d77e600-964a-4d8d-bee5-0361191825b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - latest_music
+    - system
+  theme:
+    - integrity
+id: musicblock
+theme: integrity
+region: sidebar_first
+weight: -10
+provider: null
+plugin: music_custom_block
+settings:
+  id: music_custom_block
+  label: 'Latest Music'
+  provider: latest_music
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

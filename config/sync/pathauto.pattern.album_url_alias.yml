@@ -1,0 +1,22 @@
+uuid: b37ed594-31ab-4dd9-ab81-570508c96d73
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: album_url_alias
+label: 'Album URL alias'
+type: 'canonical_entities:node'
+pattern: '[node:content-type]/[node:title]'
+selection_criteria:
+  d754d515-7e66-4647-b006-a5bff0785083:
+    id: node_type
+    bundles:
+      album: album
+    negate: false
+    context_mapping:
+      node: node
+    uuid: d754d515-7e66-4647-b006-a5bff0785083
+selection_logic: and
+weight: -5
+relationships: {  }

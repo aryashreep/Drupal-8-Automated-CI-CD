@@ -1,0 +1,25 @@
+uuid: 81c4749f-48f1-4cf6-b012-efd8861379c0
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: J2n0RpFzS0-bgSyxjs6rSdgxB1rb-bTAgqywNx_964M
+name: large
+label: 'Large (480×480)'
+effects:
+  ddd73aa7-4bd6-4c85-b600-bdf2b1628d1d:
+    uuid: ddd73aa7-4bd6-4c85-b600-bdf2b1628d1d
+    id: image_scale
+    weight: -9
+    data:
+      width: 480
+      height: 480
+      upscale: false
+  9f8980af-4752-4c31-a5e5-c71f5408b2b4:
+    uuid: 9f8980af-4752-4c31-a5e5-c71f5408b2b4
+    id: image_scale_and_crop
+    weight: -10
+    data:
+      width: 480
+      height: 480
+      anchor: center-center
