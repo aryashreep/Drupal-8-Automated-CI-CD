@@ -57,6 +57,7 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         echo $(pwd)
+        ls -l /__w/Drupal-8-Automated-CI-CD/Drupal-8-Automated-CI-CD/
         #mysql --host mysql -uroot -ppassword d8_music < $GITHUB_WORKSPACE/scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
     
