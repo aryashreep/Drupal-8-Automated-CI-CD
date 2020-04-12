@@ -72,4 +72,4 @@ jobs:
       run: |
        sudo apt-get update
        sudo apt-get install -y mysql-client
-       mysql --host mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot -e "SHOW DATABASES"
+       mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES"
