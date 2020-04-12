@@ -84,7 +84,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y mysql-client
-        mysql -hlocalhost -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8;"
-        mysql -hlocalhost -uroot -proot -e "SHOW DATABASES"
-        mysql -hlocalhost -uroot -proot drupal8 < scripts/database/dumps/drupal8.sql
-        mysql -hlocalhost -uroot -proot -e "USE drupal8; SHOW TABLES;"
+        mysqladmin ping
+        #mysql -hlocalhost -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8;"
+        #mysql -hlocalhost -uroot -proot -e "SHOW DATABASES"
+        #mysql -hlocalhost -uroot -proot drupal8 < scripts/database/dumps/drupal8.sql
+        #mysql -hlocalhost -uroot -proot -e "USE drupal8; SHOW TABLES;"
