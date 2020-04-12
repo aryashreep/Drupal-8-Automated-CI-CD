@@ -73,7 +73,10 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php_version }}
-  
+
+    - name: Install Composer dependencies
+      run: composer install --dev
+
     - name: Verify MySQL connection from container
       run: |
         apt-get update
@@ -82,9 +85,6 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
-
-    - name: Install Composer dependencies
-      run: composer install --dev
 
   phpunit:
     runs-on: ubuntu-latest
@@ -110,6 +110,9 @@ jobs:
       with:
         fetch-depth: 1
 
+    - name: Install Composer dependencies
+      run: composer install --dev
+
     - name: Verify MySQL connection from container 
       run: |
         apt-get update
@@ -118,12 +121,6 @@ jobs:
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
         mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
-
-    - name: Install Composer dependencies
-      run: |
-        composer install --dev
-        drush st
-        drush cim sync
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     #steps:
