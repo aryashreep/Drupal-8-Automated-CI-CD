@@ -10,6 +10,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+    PHP_VERSION: 7.3
+    COMPOSER_ALLOW_SUPERUSER: '1' # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "service"
