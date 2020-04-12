@@ -47,9 +47,6 @@ jobs:
       with:
         php-version: ${{ matrix.php_version }}
 
-    - name: Install Composer dependencies
-      run: composer install
-
   test-container:
     runs-on: ubuntu-latest
     container: ubuntu
