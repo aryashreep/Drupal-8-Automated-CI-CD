@@ -5,7 +5,7 @@ RUN apt-get update \
   && apt-get install mariadb-server -y
 
 COPY setup.sql /tmp/
-COPY dumps/d8_music.sql /tmp/dumps/d8_music.sql
+COPY dumps/drupal8.sql /tmp/dumps/drupal8.sql
 
 RUN service mysql start && \
   mysql < /tmp/setup.sql && \

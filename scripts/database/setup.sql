@@ -1,7 +1,7 @@
-CREATE DATABASE d8_music;
+CREATE DATABASE drupal8;
 
-USE d8_music;
-SOURCE /tmp/dumps/d8_music.sql;
+USE drupal8;
+SOURCE /tmp/dumps/drupal8.sql;
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
