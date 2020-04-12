@@ -35,6 +35,12 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
+    - name: Set up PHP ${{ matrix.php_version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php_version }}
+    - name: Install Composer dependencies
+      run: composer install
   test-container:
     runs-on: ubuntu-latest
     container: ubuntu
@@ -45,6 +51,16 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Set up PHP ${{ matrix.php_version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php_version }}
+    - name: Install Composer dependencies
+      run: composer install
     - name: Verify MySQL connection from container 
       run: |
         apt-get update
