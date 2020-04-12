@@ -18,19 +18,38 @@ env:
 jobs:
   test-host:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['7.3']
     services:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
         ports:
         - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
     - name: Verify MySQL connection from host
       run: |
         sudo apt-get install -y mysql-client
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+
+    - name: Set up PHP ${{ matrix.php_version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php_version }}
+
+    - name: Install Composer dependencies
+      run: composer install
+
   test-container:
     runs-on: ubuntu-latest
     container: ubuntu
