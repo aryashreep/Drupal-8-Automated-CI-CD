@@ -1,7 +1,0 @@
-latest_music.content:
-  path: '/allmusic'
-  defaults:
-    _controller: '\Drupal\latest_music\Controller\MusicController::content'
-    _title: 'Browse Music'
-  requirements:
-    _permission: 'access content'

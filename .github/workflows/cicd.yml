@@ -1,93 +1,78 @@
-on: [push, pull_request]
-name: Tests and code
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "service"
+  services:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['7.3']
+    # Enable the mysql services
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_DATABASE: drupal8
+          MYSQL_ROOT_PASSWORD: root
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
+    steps:
+      - name: Check out the code 
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Verify MySQL connection from host
+        run: sudo apt-get install -y mysql-client
+
+      - name: Set up PHP ${{ matrix.php_version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_version }}
+
+      - name: Install Composer dependencies
+        run: composer install --dev
+
   phpunit:
     runs-on: ubuntu-latest
-    container:
-      image: juampynr/drupal8ci:latest
-
+    strategy:
+      matrix:
+        php_version: ['7.3']
     services:
       mariadb:
-        image: quay.io/juampynr/drupal8-github-actions:latest
+        image: mariadb:latest
         ports:
-          - 33306:3306
+          - 3306
+        env:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_DATABASE: drupal8
+          MYSQL_ROOT_PASSWORD: root
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
     steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+    - name: Set up PHP ${{ matrix.php_version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php_version }}
 
-      - name: Build project
-        run: |
-          robo job:build
-      - name: Run PHPUnit tests
-        run: vendor/bin/robo job:unit-tests
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
 
-  code-standards:
-    runs-on: ubuntu-latest
-    container:
-      image: juampynr/drupal8ci:latest
+    - name: Install Composer dependencies
+      run: composer install --dev
 
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Build project
-        run: |
-          robo job:build
-      - name: Check coding standards
-        run: vendor/bin/robo job:coding-standards
-
-  code-coverage:
-    runs-on: ubuntu-latest
-    container:
-      image: juampynr/drupal8ci:latest
-
-    services:
-      mariadb:
-        image: quay.io/juampynr/drupal8-github-actions:latest
-        ports:
-          - 33306:3306
-
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Build project
-        run: |
-          robo job:build
-      - name: Assess code coverage
-        run: |
-          vendor/bin/robo job:coverage-report
-          ls -hal coverage
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v1
-        with:
-          name: coverage
-          path: coverage
-
-  existing-site-tests:
-    runs-on: ubuntu-latest
-    container:
-      image: juampynr/drupal8ci:latest
-
-    services:
-      mariadb:
-        image: quay.io/juampynr/drupal8-github-actions:latest
-        ports:
-          - 33306:3306
-
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Build project
-        run: |
-          robo job:build
-      - name: Run existing site tests
-        run: |
-          vendor/bin/robo run:chrome-headless &
-          vendor/bin/robo job:existing-site-tests
+    - name: Verify MySQL connection from container 
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mysql-client
+        mysql --host mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8;"
+        mysql --host mysql -uroot -proot -e "SHOW DATABASES"
+        mysql --host mysql -uroot -proot drupal8 < scripts/database/dumps/drupal8.sql
+        mysql --host mysql -uroot -proot -e "USE drupal8; SHOW TABLES;"
