@@ -1,97 +1,93 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Automated Drupal8 CICD
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+on: [push, pull_request]
+name: Tests and code
 jobs:
-  # This workflow contains a single job called "service"
-  healt-check:
-    # The type of runner that the job will run on
+  phpunit:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php_version: ['7.3']
-    # Enable the mysql services
+    container:
+      image: juampynr/drupal8ci:latest
+
     services:
       mariadb:
-        image: mariadb:latest
+        image: quay.io/juampynr/drupal8-github-actions:latest
         ports:
-          - 3306
-        env:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: d8_music
-          MYSQL_ROOT_PASSWORD: password
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+          - 33306:3306
 
     steps:
-      - name: Check out the code 
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           fetch-depth: 1
 
-      - name: Set up PHP ${{ matrix.php_version }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php_version }}
+      - name: Build project
+        run: |
+          robo job:build
+      - name: Run PHPUnit tests
+        run: vendor/bin/robo job:unit-tests
 
-      - name: Install Composer dependencies
-        run: composer install --dev
-
-  phpunit:
+  code-standards:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php_version: ['7.3']	
-
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    container:
+      image: juampynr/drupal8ci:latest
 
     steps:
-    - name: Check out the code 
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
-    - name: Install Composer dependencies
-      run: composer install --prefer-dist
+      - name: Build project
+        run: |
+          robo job:build
+      - name: Check coding standards
+        run: vendor/bin/robo job:coding-standards
 
-    - name: Set up PHP ${{ matrix.php_version }}
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php_version }}
+  code-coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
 
-    - name: Verify MySQL connection from container 
-      run: |
-        sudo apt-get install -y mysql-client
-        mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
-        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        mysql --host mysql -uroot -ppassword d8_music < scripts/database/dumps/d8_music.sql
-        mysql --host mysql -uroot -ppassword -e "USE d8_music; SHOW TABLES;"
+    services:
+      mariadb:
+        image: quay.io/juampynr/drupal8-github-actions:latest
+        ports:
+          - 33306:3306
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    #steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #- uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
-    # Runs a single command using the runners shell
-    #- name: Run a one-line script
-    #  run: echo "Hello, world!"
+      - name: Build project
+        run: |
+          robo job:build
+      - name: Assess code coverage
+        run: |
+          vendor/bin/robo job:coverage-report
+          ls -hal coverage
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v1
+        with:
+          name: coverage
+          path: coverage
 
-    # Runs a set of commands using the runners shell
-    #- name: Run a multi-line script
-    #  run: |
-    #    echo "Add other actions to build,"
-    #    echo "test, and deploy your project."
+  existing-site-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: juampynr/drupal8ci:latest
+
+    services:
+      mariadb:
+        image: quay.io/juampynr/drupal8-github-actions:latest
+        ports:
+          - 33306:3306
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Build project
+        run: |
+          robo job:build
+      - name: Run existing site tests
+        run: |
+          vendor/bin/robo run:chrome-headless &
+          vendor/bin/robo job:existing-site-tests
