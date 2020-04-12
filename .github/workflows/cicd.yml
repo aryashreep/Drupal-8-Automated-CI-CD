@@ -18,6 +18,9 @@ env:
 jobs:
   test-host:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['7.3']    
     services:
       mysql:
         image: mysql:5.7
@@ -43,7 +46,9 @@ jobs:
       run: composer install
   test-container:
     runs-on: ubuntu-latest
-    container: ubuntu
+    strategy:
+      matrix:
+        php_version: ['7.3']
     services:
       mysql:
         image: mysql:5.7
