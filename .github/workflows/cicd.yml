@@ -68,13 +68,13 @@ jobs:
       with:
         fetch-depth: 1
 
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist
+
     - name: Set up PHP ${{ matrix.php_version }}
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php_version }}
-
-    - name: Install Composer dependencies
-      run: composer update
 
     - name: Verify MySQL connection from container 
       run: |
