@@ -73,6 +73,5 @@ jobs:
        sudo apt-get update
        sudo apt-get install -y mysql-client
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "CREATE DATABASE IF NOT EXISTS drupal8;"
-       mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8;"
-       mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e drupal8 < ./scripts/database/dumps/drupal8.sql;
+       mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8; source ./scripts/database/dumps/drupal8.sql;"
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; SHOW TABLES;"
