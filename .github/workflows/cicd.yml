@@ -18,9 +18,6 @@ env:
 jobs:
   test-host:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php_version: ['7.3']
     services:
       mysql:
         image: mysql:5.7
@@ -32,12 +29,14 @@ jobs:
         - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-
     - name: Verify MySQL connection from host
       run: |
         sudo apt-get install -y mysql-client
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-
+    - name: Check out the code 
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
   test-container:
     runs-on: ubuntu-latest
     container: ubuntu
@@ -55,8 +54,3 @@ jobs:
         apt-get update
         apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-
-    - name: Check out the code 
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
