@@ -68,6 +68,6 @@ jobs:
       run: composer install
     - name: Verify MySQL connection from container 
       run: |
-        apt-get update
-        apt-get install -y mysql-client
-        mysql --host mysql -uroot -proot -e "SHOW DATABASES"
+       sudo apt-get update
+       sudo apt-get install -y mysql-client
+       mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot -e "SHOW DATABASES"
