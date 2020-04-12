@@ -44,10 +44,7 @@ jobs:
           fetch-depth: 1
 
       - name: Verify MySQL connection from host
-        run: |
-          mysqladmin ping
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"        
+        run: sudo apt-get install -y mysql-client       
 
       - name: Set up PHP ${{ matrix.php_version }}
         uses: shivammathur/setup-php@v2
