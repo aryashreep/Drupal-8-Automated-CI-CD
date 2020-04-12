@@ -75,7 +75,6 @@ jobs:
 
     - name: Verify MySQL connection from container 
       run: |
-        sudo apt-get update
         sudo apt-get install -y mysql-client
         mysql --host mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS d8_music;"
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
