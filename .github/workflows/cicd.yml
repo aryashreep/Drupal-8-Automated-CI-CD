@@ -21,16 +21,16 @@ jobs:
         php_version: ['7.3']
     # Enable the mysql services
     services:
-      mariadb:
+      mysql:
         image: mariadb:latest
         ports:
-          - 3306
+          - 3306/tcp
         env:
           MYSQL_USER: root
           MYSQL_PASSWORD: root
           MYSQL_DATABASE: drupal8
           MYSQL_ROOT_PASSWORD: root
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
 
     steps:
       - name: Check out the code 
@@ -55,10 +55,10 @@ jobs:
       matrix:
         php_version: ['7.3']
     services:
-      mariadb:
+      mysql:
         image: mariadb:latest
         ports:
-          - 3306
+          - 3306/tcp
         env:
           MYSQL_USER: root
           MYSQL_PASSWORD: root
@@ -85,7 +85,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y mysql-client
         mysqladmin ping
-        #mysql -hlocalhost -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8;"
-        #mysql -hlocalhost -uroot -proot -e "SHOW DATABASES"
-        #mysql -hlocalhost -uroot -proot drupal8 < scripts/database/dumps/drupal8.sql
-        #mysql -hlocalhost -uroot -proot -e "USE drupal8; SHOW TABLES;"
+        #mysql -hmysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS drupal8;"
+        #mysql -hmysql -uroot -proot -e "SHOW DATABASES"
+        #mysql -hmysql -uroot -proot drupal8 < scripts/database/dumps/drupal8.sql
+        #mysql -hmysql -uroot -proot -e "USE drupal8; SHOW TABLES;"
