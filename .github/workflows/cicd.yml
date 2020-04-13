@@ -92,7 +92,7 @@ jobs:
        sudo chmod 777 ./web/sites/default/simpletest
        sudo mkdir ./web/sites/default/files/report
        sudo chmod 777 ./web/sites/default/files/report
-       drush cr
+       #drush cr
        drush st
        drush cim sync -y
        drush en simpletest

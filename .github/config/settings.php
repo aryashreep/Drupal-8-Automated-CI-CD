@@ -768,4 +768,5 @@ $databases['default']['default'] = [
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
+  'unix_socket' => '/var/lib/mysql/mysql.sock',
 ];
