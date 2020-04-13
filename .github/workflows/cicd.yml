@@ -82,7 +82,7 @@ jobs:
        composer --version
        composer validate
        composer install -n
-       locate composer | grep vendor/bin
+       which composer
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        drush --version
