@@ -74,7 +74,6 @@ jobs:
       run: |
        sudo apt-get update
        sudo apt-get install -y mysql-client
-       mysqladmin ping
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "CREATE DATABASE IF NOT EXISTS drupal8;"
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8; source ./scripts/database/dumps/drupal8.sql;"
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; SHOW TABLES;"
@@ -86,8 +85,6 @@ jobs:
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        drush --version
-       php -i | grep -w default_socket
-       php -r 'phpinfo();' | grep -w default_socket
        drush st
        sudo rm -rf ./web/sites/default/settings.php
        sudo cp ./.github/config/settings.php ./web/sites/default/
