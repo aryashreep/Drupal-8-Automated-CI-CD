@@ -88,7 +88,7 @@ jobs:
        drush st
        sudo rm -rf ./web/sites/default/settings.php
        sudo cp ./.github/config/settings.php ./web/sites/default/
-       sudo cp ./.github/config/settings.local.php ./web/sites/default/
+       sudo cp ./.github/config/settings.local.php ./web/sites/
        sudo mkdir ./web/sites/default/simpletest
        sudo chmod 777 ./web/sites/default/simpletest
        sudo mkdir ./web/sites/default/files/report
