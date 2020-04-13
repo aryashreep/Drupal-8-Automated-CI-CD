@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         php_version: ['7.3']
-      env:
+    env:
         extensions: xdebug
     services:
       mysql:
@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         php_version: ['7.3']
-      env:
+    env:
         extensions: xdebug        
     services:
       mysql:
