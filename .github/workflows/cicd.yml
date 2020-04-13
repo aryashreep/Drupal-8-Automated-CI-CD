@@ -70,14 +70,6 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php_version }}
-    - name: Install Composer dependencies
-      run: |
-        composer --version
-        composer validate
-        composer install -n
-        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
-        source ~/.bash_profile
-        drush --version      
     - name: Verify MySQL connection from container 
       run: |
        sudo apt-get update
@@ -87,6 +79,12 @@ jobs:
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; SHOW TABLES;"
     - name: Site Setup
       run: |
+       composer --version
+       composer validate
+       composer install -n
+       echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
+       source ~/.bash_profile
+       drush --version
        sudo rm -rf ./web/sites/default/settings.php
        sudo cp ./.github/config/settings.php ./web/sites/default/
        sudo cp ./.github/config/settings.local.php ./web/sites/default/
