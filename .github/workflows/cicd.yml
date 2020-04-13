@@ -82,8 +82,7 @@ jobs:
        composer --version
        composer validate
        composer install -n
-       which composer
-       echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
+       echo "export PATH=$PATH:$GITHUB_WORKSPACE/.composer/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        drush --version
        sudo rm -rf ./web/sites/default/settings.php
