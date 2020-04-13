@@ -71,7 +71,13 @@ jobs:
       with:
         php-version: ${{ matrix.php_version }}
     - name: Install Composer dependencies
-      run: composer install
+      run: |
+        composer --version
+        composer validate
+        composer install -n
+        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
+        source ~/.bash_profile
+        drush --version      
     - name: Verify MySQL connection from container 
       run: |
        sudo apt-get update
