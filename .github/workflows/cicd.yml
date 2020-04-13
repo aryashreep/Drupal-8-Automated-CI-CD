@@ -94,9 +94,9 @@ jobs:
        sudo chmod 777 ./web/sites/default/files/report
        #drush cr
        drush st
-       drush cim sync -y
+       #drush cim sync -y
        drush en simpletest
-       drush cr
+       drush cr -vvv
     - name: Run the code coverage and unit testing
       run: php vendor/phpunit/phpunit/phpunit --coverage-html ./web/sites/default/files/reports
     - name: Archive code coverage results
