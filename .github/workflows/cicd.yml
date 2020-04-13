@@ -91,6 +91,7 @@ jobs:
        sudo chmod 777 ./web/sites/default/simpletest
        sudo mkdir ./web/sites/default/files/report
        sudo chmod 777 ./web/sites/default/files/report
+       cat ./web/sites/default/settings.php
        #drush cr -vvv
        drush st
        #drush config-import sync -y -vvv
