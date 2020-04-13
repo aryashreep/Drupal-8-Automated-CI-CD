@@ -85,6 +85,7 @@ jobs:
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        drush --version
+       drush st
        sudo rm -rf ./web/sites/default/settings.php
        sudo cp ./.github/config/settings.php ./web/sites/default/
        sudo cp ./.github/config/settings.local.php ./web/sites/default/
@@ -92,10 +93,11 @@ jobs:
        sudo chmod 777 ./web/sites/default/simpletest
        sudo mkdir ./web/sites/default/files/report
        sudo chmod 777 ./web/sites/default/files/report
+       drush cr
+       drush st
        drush cim sync -y
        drush en simpletest
        drush cr
-       drush st
     - name: Run the code coverage and unit testing
       run: php vendor/phpunit/phpunit/phpunit --coverage-html ./web/sites/default/files/reports
     - name: Archive code coverage results
