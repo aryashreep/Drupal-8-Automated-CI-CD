@@ -20,7 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php_version: ['7.3']    
+        php_version: ['7.3']
+      env:
+        extensions: xdebug
     services:
       mysql:
         image: mysql:5.7
@@ -44,11 +46,13 @@ jobs:
         php-version: ${{ matrix.php_version }}
     - name: Install Composer dependencies
       run: composer install
-  test-container:
+  unit-testing:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php_version: ['7.3']
+      env:
+        extensions: xdebug        
     services:
       mysql:
         image: mysql:5.7
@@ -75,3 +79,24 @@ jobs:
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "CREATE DATABASE IF NOT EXISTS drupal8;"
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8; source ./scripts/database/dumps/drupal8.sql;"
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; SHOW TABLES;"
+    - name: Site Setup
+      run: |
+       sudo rm -rf ./web/sites/default/settings.php
+       sudo cp ./.github/config/settings.php ./web/sites/default/
+       sudo cp ./.github/config/settings.local.php ./web/sites/default/
+       sudo mkdir ./www/sites/default/simpletest
+       sudo chmod 777 ./www/sites/default/simpletest
+       sudo mkdir ./www/sites/default/files/report
+       sudo chmod 777 ./www/sites/default/files/report
+       drush cim sync
+       drush en simpletest
+       drush cr
+       drush st
+    - name: Run the code coverage and unit testing
+      run: php vendor/phpunit/phpunit/phpunit --coverage-html ./web/sites/default/files/reports
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v1
+      with:
+        name: coverage
+        path: coverage
+      
