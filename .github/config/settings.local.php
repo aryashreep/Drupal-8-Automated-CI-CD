@@ -9,11 +9,11 @@ $databases['default']['default'] = [
   'username' => 'root',
   'password' => 'root',
   'prefix' => '',
-  'host' => '127.0.0.1',
+  'host' => 'mysql',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
-  'unix_socket' => '/var/run/mysqld/mysqld.sock',
+  //'unix_socket' => '/var/run/mysqld/mysqld.sock',
 ];
 
 // Display errors.
