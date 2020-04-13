@@ -9,8 +9,8 @@ $databases['default']['default'] = [
   'username' => 'root',
   'password' => 'root',
   'prefix' => '',
-  'host' => 'localhost',
-  'port' => '',
+  'host' => '',
+  'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 ];

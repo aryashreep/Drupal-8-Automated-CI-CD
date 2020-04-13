@@ -85,6 +85,8 @@ jobs:
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        drush --version
+       php -i | grep -w default_socket
+       php -r 'phpinfo();' | grep -w default_socket
        drush st
        sudo rm -rf ./web/sites/default/settings.php
        sudo cp ./.github/config/settings.php ./web/sites/default/
