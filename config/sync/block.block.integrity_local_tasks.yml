@@ -9,7 +9,7 @@ _core:
 id: integrity_local_tasks
 theme: integrity
 region: content
-weight: -12
+weight: -14
 provider: null
 plugin: local_tasks_block
 settings:

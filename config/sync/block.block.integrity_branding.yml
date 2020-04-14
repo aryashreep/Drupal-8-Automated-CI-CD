@@ -11,7 +11,7 @@ _core:
 id: integrity_branding
 theme: integrity
 region: main_menu
-weight: -7
+weight: -14
 provider: null
 plugin: system_branding_block
 settings:

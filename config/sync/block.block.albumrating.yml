@@ -1,0 +1,29 @@
+uuid: b42d5ced-9414-4a3c-aebf-d035455d8e8e
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.album_rating
+  module:
+    - facets
+    - system
+  theme:
+    - integrity
+id: albumrating
+theme: integrity
+region: sidebar_first
+weight: -11
+provider: null
+plugin: 'facet_block:album_rating'
+settings:
+  id: 'facet_block:album_rating'
+  label: Rating
+  provider: facets
+  label_display: visible
+  block_id: albumrating
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

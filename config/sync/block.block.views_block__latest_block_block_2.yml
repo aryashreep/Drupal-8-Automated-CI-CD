@@ -12,7 +12,7 @@ dependencies:
 id: views_block__latest_block_block_2
 theme: integrity
 region: sidebar_first
-weight: -7
+weight: -6
 provider: null
 plugin: 'views_block:latest_block-block_2'
 settings:

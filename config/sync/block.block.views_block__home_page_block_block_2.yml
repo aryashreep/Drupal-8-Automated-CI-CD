@@ -12,7 +12,7 @@ dependencies:
 id: views_block__home_page_block_block_2
 theme: integrity
 region: sidebar_second
-weight: 0
+weight: -10
 provider: null
 plugin: 'views_block:home_page_block-block_2'
 settings:

@@ -1,0 +1,85 @@
+uuid: b9873738-8f44-4a67-a201-5d7dff731fa0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_album_rating
+    - field.storage.node.body
+    - search_api.server.database_search
+  module:
+    - node
+    - taxonomy
+    - search_api
+    - media
+id: default_content_index
+name: 'Default Content Index'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  field_album_rating:
+    label: 'Album rating'
+    datasource_id: 'entity:node'
+    property_path: field_album_rating
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_album_rating
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  vid:
+    label: Vocabulary
+    datasource_id: 'entity:taxonomy_term'
+    property_path: vid
+    type: string
+    dependencies:
+      module:
+        - taxonomy
+datasource_settings:
+  'entity:media':
+    languages:
+      default: true
+      selected: {  }
+    bundles:
+      default: true
+      selected: {  }
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:taxonomy_term':
+    bundles:
+      default: true
+      selected:
+        - genre
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: lifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: database_search

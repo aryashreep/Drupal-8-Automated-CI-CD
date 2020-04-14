@@ -10,7 +10,7 @@ dependencies:
 id: artistalbumblock
 theme: integrity
 region: content
-weight: -4
+weight: -6
 provider: null
 plugin: artist_album_block
 settings:

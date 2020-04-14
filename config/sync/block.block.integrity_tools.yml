@@ -13,7 +13,7 @@ _core:
 id: integrity_tools
 theme: integrity
 region: main_menu
-weight: 0
+weight: -10
 provider: null
 plugin: 'system_menu_block:tools'
 settings:

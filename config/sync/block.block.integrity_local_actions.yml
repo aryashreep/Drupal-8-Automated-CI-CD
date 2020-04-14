@@ -9,7 +9,7 @@ _core:
 id: integrity_local_actions
 theme: integrity
 region: content
-weight: -11
+weight: -13
 provider: null
 plugin: local_actions_block
 settings:

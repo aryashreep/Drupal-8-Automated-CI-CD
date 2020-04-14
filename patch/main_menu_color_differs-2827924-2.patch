@@ -56,7 +56,7 @@ index 23492ba..41af798 100644
 +}
 \ No newline at end of file
 diff --git a/integrity.theme b/integrity.theme
-index 7bc0508..e04d3bb 100644
+index 7bc0508..3ec52f1 100644
 --- a/integrity.theme
 +++ b/integrity.theme
 @@ -75,6 +75,16 @@ function integrity_preprocess_page(&$variables) {
@@ -110,7 +110,7 @@ index 7bc0508..e04d3bb 100644
    for ($i = 0; $i <= SLIDESHOW_COUNT; $i++) {
      if (isset($values['slide_image_path' . $i]) && !empty($values['slide_image_path' . $i])) {
        // Load the file via file.fid.
-@@ -256,3 +286,27 @@ function integrity_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInter
+@@ -256,3 +286,29 @@ function integrity_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInter
      }
    }
  }
@@ -125,17 +125,19 @@ index 7bc0508..e04d3bb 100644
 +    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
 +
 +    $node = $request->attributes->get('node');
-+    $typeName = ucfirst($node->bundle());
-+    if (!empty($page_title)) {
-+      $variables['breadcrumb'][] = [
-+        'text' => $typeName,
-+        'attributes' => new Attribute(['class' => ['active']])
-+      ];      
-+      $variables['breadcrumb'][] = [
-+        'text' => $page_title,
-+        'attributes' => new Attribute(['class' => ['active']])
-+      ];  
-+    }
++	if($node != NULL) {
++		$typeName = ucfirst($node->bundle());
++		if (!empty($page_title)) {
++		  $variables['breadcrumb'][] = [
++			'text' => $typeName,
++			'attributes' => new Attribute(['class' => ['active']])
++		  ];      
++		  $variables['breadcrumb'][] = [
++			'text' => $page_title,
++			'attributes' => new Attribute(['class' => ['active']])
++		  ];  
++		}	
++	}
 +  }
 +}
 \ No newline at end of file

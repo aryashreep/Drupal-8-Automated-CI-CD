@@ -11,7 +11,7 @@ _core:
 id: integrity_help
 theme: integrity
 region: help
-weight: -6
+weight: -14
 provider: null
 plugin: help_block
 settings:

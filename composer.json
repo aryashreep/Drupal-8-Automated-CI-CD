@@ -51,7 +51,6 @@
         "drupal/jcarousel": "^4.0",
         "drupal/pathauto": "^1.6",
         "drupal/search_api": "^1.15",
-        "drupal/search_api_solr": "^3.9",
         "drupal/token": "^1.6",
         "drupal/video_embed_field": "^2.3",
         "npm-asset/jquery": "^2.2",

@@ -10,7 +10,7 @@ dependencies:
 id: musicblock
 theme: integrity
 region: sidebar_first
-weight: -10
+weight: -9
 provider: null
 plugin: music_custom_block
 settings:
@@ -21,6 +21,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: "<front>\r\n/search"
     negate: true
     context_mapping: {  }
