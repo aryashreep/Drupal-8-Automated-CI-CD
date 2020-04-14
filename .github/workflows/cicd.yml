@@ -63,7 +63,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
     - name: Check out the code 
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Set up PHP ${{ matrix.php_version }}
@@ -97,11 +97,7 @@ jobs:
        #drush config-import sync -y -vvv
        #drush en simpletest -vvv
        #drush cr -vvv
-    - name: PHPUnit tests
-      uses: php-actions/phpunit@v1
-      with:
-        memory: 512M
-    - name: Run the code coverage and unit testing        
+    - name: Run the code coverage and unit testing
       run: |
         sudo mkdir -p coverage
         sudo chmod 777 coverage
@@ -112,4 +108,4 @@ jobs:
       with:
         name: coverage
         path: coverage
-      
+    
