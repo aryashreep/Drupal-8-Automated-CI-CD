@@ -100,7 +100,6 @@ jobs:
     - name: PHPUnit tests
       uses: php-actions/phpunit@v1
       with:
-        #config: ./phpunit.xml
         memory: 512M
     - name: Run the code coverage and unit testing        
       run: |
