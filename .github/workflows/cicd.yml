@@ -63,7 +63,9 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
     steps:
     - name: Check out the code 
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v1 # or alternative dependency management
+    - uses: php-actions/phpunit@v1
       with:
         fetch-depth: 1
     - name: Set up PHP ${{ matrix.php_version }}
@@ -98,9 +100,7 @@ jobs:
        #drush en simpletest -vvv
        #drush cr -vvv
     - name: PHPUnit tests
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v1 # or alternative dependency management
-    - uses: php-actions/phpunit@v1
+      uses: php-actions/phpunit@v1
       with:
         config: ./phpunit.xml
         memory: 512M
