@@ -97,7 +97,11 @@ jobs:
        #drush config-import sync -y -vvv
        #drush en simpletest -vvv
        #drush cr -vvv
-    - name: Run the code coverage and unit testing
+    - name: PHPUnit tests
+      uses: php-actions/phpunit@v1
+      with:
+        config: ./phpunit.xml
+        memory: 512M       
       run: |
         sudo mkdir -p coverage
         sudo chmod 777 coverage
