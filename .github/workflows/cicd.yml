@@ -81,7 +81,7 @@ jobs:
       run: |
        composer --version
        composer validate
-       composer update -n
+       composer install -n
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
        ls -l ./web/sites/default/
