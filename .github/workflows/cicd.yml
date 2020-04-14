@@ -101,7 +101,8 @@ jobs:
       uses: php-actions/phpunit@v1
       with:
         config: ./phpunit.xml
-        memory: 512M       
+        memory: 512M
+    - name: Run the code coverage and unit testing        
       run: |
         sudo mkdir -p coverage
         sudo chmod 777 coverage
