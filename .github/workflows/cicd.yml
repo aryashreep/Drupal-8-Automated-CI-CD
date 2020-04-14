@@ -75,8 +75,8 @@ jobs:
        sudo apt-get update
        sudo apt-get install -y mysql-client
        mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "CREATE DATABASE IF NOT EXISTS drupal8;"
-       #mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8; source ./scripts/database/dumps/drupal8.sql;"
-       #mysql --host 172.18.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; select user();"
+       mysql --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "SHOW DATABASES;USE drupal8; source ./scripts/database/dumps/drupal8.sql;"
+       mysql --host 172.18.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot --protocol=tcp -e "USE drupal8; select user();"
     - name: Site Setup
       run: |
        composer --version
@@ -84,16 +84,13 @@ jobs:
        composer install -n
        echo "export PATH=$PATH:$GITHUB_WORKSPACE/vendor/bin" >> ~/.bash_profile
        source ~/.bash_profile
-       sudo chmod a-w sites/default/settings.php
-       sudo chmod a-w sites/default
-       drush si --db-url=mysql://root:root@172.18.0.1:3306/drupal8
-       #ls -l ./web/sites/default/
-       #sudo rm -rf ./web/sites/default/settings.php
-       #sudo cp ./.github/config/settings.php ./web/sites/default/
-       #sudo mkdir ./web/sites/default/simpletest
-       #sudo chmod 777 ./web/sites/default/simpletest
-       #sudo mkdir ./web/sites/default/files/report
-       #sudo chmod 777 ./web/sites/default/files/report
+       ls -l ./web/sites/default/
+       sudo rm -rf ./web/sites/default/settings.php
+       sudo cp ./.github/config/settings.php ./web/sites/default/
+       sudo mkdir ./web/sites/default/simpletest
+       sudo chmod 777 ./web/sites/default/simpletest
+       sudo mkdir ./web/sites/default/files/report
+       sudo chmod 777 ./web/sites/default/files/report
        #cat ./web/sites/default/settings.php
        #drush cr -vvv
        drush st
