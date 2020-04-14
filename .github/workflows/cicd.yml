@@ -98,9 +98,13 @@ jobs:
        #drush en simpletest -vvv
        #drush cr -vvv
     - name: Run the code coverage and unit testing
-      run: php vendor/phpunit/phpunit/phpunit --coverage-html ./web/sites/default/files/reports
+      run: |
+        sudo mkdir -p coverage
+        sudo chmod 777 coverage
+        php vendor/phpunit/phpunit/phpunit --coverage-html ./web/sites/default/files/reports
     - name: Archive code coverage results
       uses: actions/upload-artifact@v1
+      if: failure()
       with:
         name: coverage
         path: coverage
